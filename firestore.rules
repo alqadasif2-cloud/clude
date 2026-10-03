@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // جميع عمليات القراءة والكتابة محظورة تماماً على العملاء الخارجيين
+    // الوصول محصور حصراً بخادم Backend عبر Firebase Admin SDK بصلاحيات Service Account
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
